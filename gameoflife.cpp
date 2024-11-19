@@ -80,7 +80,7 @@ void thread_print(int id,int board[ROW][COL],int startRow, int endRow, int start
 
             mysem.acquire();
             // std::cout<<std::to_string(id)+" ok i go ";
-            std::string lineSegment = std::to_string(id)+ ":";
+            std::string lineSegment;
             for (int j = startCol; j < endCol; j++) {
                 if (board[i][j] == 1) {
                     lineSegment += " # ";
@@ -100,7 +100,6 @@ void thread_print(int id,int board[ROW][COL],int startRow, int endRow, int start
 
             // std::cout<<std::to_string(id) + " says: i give you pass, "
         }
-        std::cout<<"im done " + std::to_string(id);
         updown.release();
 
 }
@@ -124,11 +123,6 @@ void print_board(int board[ROW][COL]) {
     bottomRight.join();
 }
 
-int update_board(int board[ROW][COL]) {
-    semlg.release();
-    print_board(board);
-
-}
 
 int main() {
     system("cls");
@@ -138,9 +132,10 @@ int main() {
     print_board(plansza);
     Sleep(4000);
     while (true) {
-        Sleep(500);
+        Sleep(200);
         system("cls");
-        update_board(plansza);
+        semlg.release();
+        print_board(plansza);
         life(plansza);
     }
 
