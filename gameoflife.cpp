@@ -21,7 +21,7 @@ void create_board(int board[ROW][COL]) {
 }
 
 void create_player(int board[ROW][COL]) {
-    board[1][1] = 1;
+     board[1][1] = 1;
     board[2][0] = 1;
     board[2][1] = 1;
     board[3][1] = 1;
@@ -212,6 +212,7 @@ void create_player(int board[ROW][COL]) {
     board[24][28] = 1;
     board[25][29] = 1;
 
+
 }
 
 
@@ -261,7 +262,7 @@ void thread_print(int id,int board[ROW][COL],int startRow, int endRow, int start
 
         for (int i = startRow; i < endRow; i++) {
 
-            mysem.acquire();
+
             // std::cout<<std::to_string(id)+" ok i go ";
             std::string lineSegment;
             for (int j = startCol; j < endCol; j++) {
@@ -271,6 +272,7 @@ void thread_print(int id,int board[ROW][COL],int startRow, int endRow, int start
                     lineSegment += "   ";
                 }
             }
+            mysem.acquire();
             std::cout << lineSegment;
             if(endCol==COL) {
                 std::cout << std::endl;
