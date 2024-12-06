@@ -14,12 +14,10 @@ const int ROW = 30;
 
 std::binary_semaphore semlg(1), sempg(0), semld(0), sempd(0), updown(2);
 
-void create_board(std::vector<std::vector<int>>& board) {
-    board.resize(ROW, std::vector<int>(COL, 0));
-}
+
 std::vector<std::vector<int>> board(ROW, std::vector<int>(COL, 0));
 
-void import_board(const std::string& filename, std::vector<std::vector<int>> board) {
+void import_board(const std::string& filename, std::vector<std::vector<int>>& board) {
     std::ifstream file(filename);
     std::string line;
 
@@ -28,18 +26,26 @@ void import_board(const std::string& filename, std::vector<std::vector<int>> boa
         return;
     }
 
-    int rowIdx = 0;
-    while (getline(file, line) && rowIdx < ROW) {
-        for (int colIdx = 0; colIdx < line.size() && colIdx < COL; ++colIdx) {
-            if (line[colIdx] == '0' || line[colIdx] == '1') {
-                board[rowIdx][colIdx] = line[colIdx] - '0';
+    // Read the file to determine the number of rows and columns
+    std::vector<std::string> lines;
+    while (getline(file, line)) {
+        lines.push_back(line);
+    }
+    file.close();
+
+    // Resize the board
+    board.resize(ROW, std::vector<int>(COL, 0));
+
+    // Populate the board with the values from the file
+    for (int rowIdx = 0; rowIdx < ROW; ++rowIdx) {
+        for (int colIdx = 0; colIdx < lines[rowIdx].size() && colIdx < COL; ++colIdx) {
+            if (lines[rowIdx][colIdx] == '0' || lines[rowIdx][colIdx] == '1') {
+                board[rowIdx][colIdx] = lines[rowIdx][colIdx] - '0';
             }
         }
-        ++rowIdx;
     }
-
-    file.close();
 }
+
 void life(std::vector<std::vector<int>>& board) {
     std::vector<std::vector<int>> tempBoard = board;
 
@@ -76,16 +82,19 @@ void thread_print(int id, std::vector<std::vector<int>>& board, int startRow, in
         std::string lineSegment;
         for (int j = startCol; j < endCol; j++) {
             if (board[i][j] == 1) {
-                lineSegment += " # ";
+                lineSegment += "|#|";
             } else {
-                lineSegment += "   ";
+                lineSegment += "|_|";
             }
         }
-        mysem.acquire();
         if (endCol == COL) {
+
+            int dlug = lineSegment.size();
+            lineSegment += std::to_string(dlug);
             lineSegment += "\n";
         }
-        if ((i == (ROW / 2) - 1 && endCol == COL) || (i == ROW - 1 && endCol == COL)) {
+        mysem.acquire();
+        if ((i == (ROW / 2) && endCol == COL) || (i == ROW && endCol == COL)) {
         } else {
             std::cout << lineSegment;
             nextsem.release();
@@ -93,7 +102,31 @@ void thread_print(int id, std::vector<std::vector<int>>& board, int startRow, in
     }
     updown.release();
 }
+void thread_print2(int id, std::vector<std::vector<int>>& board, int startRow, int endRow, int startCol, int endCol, std::binary_semaphore& mysem, std::binary_semaphore& nextsem) {
+    for (int i = startRow; i < endRow; i++) {
+        std::string lineSegment;
+        for (int j = startCol; j < endCol; j++) {
+            if (board[i][j] == 1) {
+                lineSegment += "|#|";
+            } else {
+                lineSegment += "|_|";
+            }
+        }
+        if (endCol == COL) {
 
+            int dlug = lineSegment.size();
+            lineSegment += std::to_string(dlug);
+            lineSegment += "\n";
+        }
+        mysem.acquire();
+        if ((i == (ROW / 2)-1 && endCol == COL) || (i == ROW && endCol == COL)) {
+        } else {
+            std::cout << lineSegment;
+            nextsem.release();
+        }
+    }
+    updown.release();
+}
 void print_board(std::vector<std::vector<int>>& board) {
     std::thread topLeft(thread_print, 1, std::ref(board), 0, 15, 0, 15, std::ref(semlg), std::ref(sempg));
     std::thread topRight(thread_print, 2, std::ref(board), 0, 15, 15, 30, std::ref(sempg), std::ref(semlg));
@@ -102,8 +135,8 @@ void print_board(std::vector<std::vector<int>>& board) {
     updown.acquire();
     updown.acquire();
     semld.release();
-    std::thread bottomLeft(thread_print, 3, std::ref(board), 15, 30, 0, 15, std::ref(semld), std::ref(sempd));
-    std::thread bottomRight(thread_print, 4, std::ref(board), 15, 30, 15, 30, std::ref(sempd), std::ref(semld));
+    std::thread bottomLeft(thread_print2, 3, std::ref(board), 15, 30, 0, 15, std::ref(semld), std::ref(sempd));
+    std::thread bottomRight(thread_print2, 4, std::ref(board), 15, 30, 15, 30, std::ref(sempd), std::ref(semld));
     topLeft.join();
     topRight.join();
     bottomLeft.join();
@@ -113,13 +146,11 @@ void print_board(std::vector<std::vector<int>>& board) {
 int main() {
     system("cls");
     system("color 86");
-    std::vector<std::vector<int>> board;
-    create_board(board);
     import_board("pattern.txt", board);
     print_board(board);
     Sleep(2000);
     while (true) {
-        Sleep(100);
+        Sleep(1000);
         system("cls");
         semlg.release();
         print_board(board);
