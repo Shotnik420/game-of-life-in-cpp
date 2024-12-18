@@ -1,0 +1,122 @@
+\doxysection{C\+:/\+Users/szotad/\+Documents/\+Git\+Hub/game-\/of-\/life-\/cpp-\/attempt/gameoflife.cpp File Reference}
+\hypertarget{gameoflife_8cpp}{}\label{gameoflife_8cpp}\index{C:/Users/szotad/Documents/GitHub/game-\/of-\/life-\/cpp-\/attempt/gameoflife.cpp@{C:/Users/szotad/Documents/GitHub/game-\/of-\/life-\/cpp-\/attempt/gameoflife.cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$random$>$}\newline
+{\ttfamily \#include $<$windows.\+h$>$}\newline
+{\ttfamily \#include $<$semaphore$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include "{}./file\+\_\+sys/filesys.\+h"{}}\newline
+{\ttfamily \#include "{}menu/menu.\+h"{}}\newline
+{\ttfamily \#include "{}simulation.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::binary\+\_\+semaphore \mbox{\hyperlink{gameoflife_8cpp_a94dd0406c88dabbe1757030d023330b7}{sem\+Left\+Up}} (1)
+\item 
+std\+::binary\+\_\+semaphore \mbox{\hyperlink{gameoflife_8cpp_aad858bf7c06d4181c3f8a4bc9150db2a}{sem\+Right\+Up}} (0)
+\item 
+std\+::binary\+\_\+semaphore \mbox{\hyperlink{gameoflife_8cpp_a19df52e27f8806bff879c0d569ba8ccc}{sem\+Left\+Down}} (0)
+\item 
+std\+::binary\+\_\+semaphore \mbox{\hyperlink{gameoflife_8cpp_ab7c9608940f6b5dd0437f5526135bd7d}{sem\+Right\+Down}} (0)
+\item 
+std\+::binary\+\_\+semaphore \mbox{\hyperlink{gameoflife_8cpp_a23e06caa33765e9066572f9d9e1c4ae4}{updown}} (2)
+\item 
+std\+::binary\+\_\+semaphore \mbox{\hyperlink{gameoflife_8cpp_a172bc175e8750074b6b7912c253f93af}{next\+\_\+screen\+\_\+sem}} (0)
+\item 
+std\+::vector$<$ std\+::vector$<$ int $>$ $>$ \mbox{\hyperlink{gameoflife_8cpp_aa87fdafed6b4947a42388e802dbdb977}{board}} (\mbox{\hyperlink{gameoflife_8cpp_a3b0a2b7a185fb4a44c57229a653fca70}{ROW}}, std\+::vector$<$ int $>$(\mbox{\hyperlink{gameoflife_8cpp_ac0459eb0ff914992fedc47c186c9b86f}{COL}}, 0))
+\item 
+void \mbox{\hyperlink{gameoflife_8cpp_acb8a23415b5fb66ec6c1ff603f9ea5d4}{thread\+\_\+print}} (int id, std\+::vector$<$ std\+::vector$<$ int $>$ $>$ \&\mbox{\hyperlink{gameoflife_8cpp_aa87fdafed6b4947a42388e802dbdb977}{board}}, int start\+Row, int end\+Row, int start\+Col, int end\+Col, std\+::binary\+\_\+semaphore \&mysem, std\+::binary\+\_\+semaphore \&nextsem)
+\item 
+void \mbox{\hyperlink{gameoflife_8cpp_af20d35058bea9efc68e032e2da377e0f}{print\+\_\+board}} (std\+::vector$<$ std\+::vector$<$ int $>$ $>$ \&\mbox{\hyperlink{gameoflife_8cpp_aa87fdafed6b4947a42388e802dbdb977}{board}})
+\item 
+int \mbox{\hyperlink{gameoflife_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{gameoflife_8cpp_ac0459eb0ff914992fedc47c186c9b86f}{COL}} = 30
+\item 
+int \mbox{\hyperlink{gameoflife_8cpp_a3b0a2b7a185fb4a44c57229a653fca70}{ROW}} = 30
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{gameoflife_8cpp_aa87fdafed6b4947a42388e802dbdb977}\index{gameoflife.cpp@{gameoflife.cpp}!board@{board}}
+\index{board@{board}!gameoflife.cpp@{gameoflife.cpp}}
+\doxysubsubsection{\texorpdfstring{board()}{board()}}
+{\footnotesize\ttfamily \label{gameoflife_8cpp_aa87fdafed6b4947a42388e802dbdb977} 
+std\+::vector$<$ std\+::vector$<$ int $>$ $>$ board (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gameoflife_8cpp_a3b0a2b7a185fb4a44c57229a653fca70}{ROW}}}]{}{, }\item[{std\+::vector$<$ int $>$}]{}{COL, 0}\end{DoxyParamCaption})}
+
+\Hypertarget{gameoflife_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\index{gameoflife.cpp@{gameoflife.cpp}!main@{main}}
+\index{main@{main}!gameoflife.cpp@{gameoflife.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{gameoflife_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+int main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{gameoflife_8cpp_a172bc175e8750074b6b7912c253f93af}\index{gameoflife.cpp@{gameoflife.cpp}!next\_screen\_sem@{next\_screen\_sem}}
+\index{next\_screen\_sem@{next\_screen\_sem}!gameoflife.cpp@{gameoflife.cpp}}
+\doxysubsubsection{\texorpdfstring{next\_screen\_sem()}{next\_screen\_sem()}}
+{\footnotesize\ttfamily \label{gameoflife_8cpp_a172bc175e8750074b6b7912c253f93af} 
+std\+::binary\+\_\+semaphore next\+\_\+screen\+\_\+sem (\begin{DoxyParamCaption}\item[{0}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{gameoflife_8cpp_af20d35058bea9efc68e032e2da377e0f}\index{gameoflife.cpp@{gameoflife.cpp}!print\_board@{print\_board}}
+\index{print\_board@{print\_board}!gameoflife.cpp@{gameoflife.cpp}}
+\doxysubsubsection{\texorpdfstring{print\_board()}{print\_board()}}
+{\footnotesize\ttfamily \label{gameoflife_8cpp_af20d35058bea9efc68e032e2da377e0f} 
+void print\+\_\+board (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::vector$<$ int $>$ $>$ \&}]{board}{}\end{DoxyParamCaption})}
+
+\Hypertarget{gameoflife_8cpp_a19df52e27f8806bff879c0d569ba8ccc}\index{gameoflife.cpp@{gameoflife.cpp}!semLeftDown@{semLeftDown}}
+\index{semLeftDown@{semLeftDown}!gameoflife.cpp@{gameoflife.cpp}}
+\doxysubsubsection{\texorpdfstring{semLeftDown()}{semLeftDown()}}
+{\footnotesize\ttfamily \label{gameoflife_8cpp_a19df52e27f8806bff879c0d569ba8ccc} 
+std\+::binary\+\_\+semaphore sem\+Left\+Down (\begin{DoxyParamCaption}\item[{0}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{gameoflife_8cpp_a94dd0406c88dabbe1757030d023330b7}\index{gameoflife.cpp@{gameoflife.cpp}!semLeftUp@{semLeftUp}}
+\index{semLeftUp@{semLeftUp}!gameoflife.cpp@{gameoflife.cpp}}
+\doxysubsubsection{\texorpdfstring{semLeftUp()}{semLeftUp()}}
+{\footnotesize\ttfamily \label{gameoflife_8cpp_a94dd0406c88dabbe1757030d023330b7} 
+std\+::binary\+\_\+semaphore sem\+Left\+Up (\begin{DoxyParamCaption}\item[{1}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{gameoflife_8cpp_ab7c9608940f6b5dd0437f5526135bd7d}\index{gameoflife.cpp@{gameoflife.cpp}!semRightDown@{semRightDown}}
+\index{semRightDown@{semRightDown}!gameoflife.cpp@{gameoflife.cpp}}
+\doxysubsubsection{\texorpdfstring{semRightDown()}{semRightDown()}}
+{\footnotesize\ttfamily \label{gameoflife_8cpp_ab7c9608940f6b5dd0437f5526135bd7d} 
+std\+::binary\+\_\+semaphore sem\+Right\+Down (\begin{DoxyParamCaption}\item[{0}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{gameoflife_8cpp_aad858bf7c06d4181c3f8a4bc9150db2a}\index{gameoflife.cpp@{gameoflife.cpp}!semRightUp@{semRightUp}}
+\index{semRightUp@{semRightUp}!gameoflife.cpp@{gameoflife.cpp}}
+\doxysubsubsection{\texorpdfstring{semRightUp()}{semRightUp()}}
+{\footnotesize\ttfamily \label{gameoflife_8cpp_aad858bf7c06d4181c3f8a4bc9150db2a} 
+std\+::binary\+\_\+semaphore sem\+Right\+Up (\begin{DoxyParamCaption}\item[{0}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{gameoflife_8cpp_acb8a23415b5fb66ec6c1ff603f9ea5d4}\index{gameoflife.cpp@{gameoflife.cpp}!thread\_print@{thread\_print}}
+\index{thread\_print@{thread\_print}!gameoflife.cpp@{gameoflife.cpp}}
+\doxysubsubsection{\texorpdfstring{thread\_print()}{thread\_print()}}
+{\footnotesize\ttfamily \label{gameoflife_8cpp_acb8a23415b5fb66ec6c1ff603f9ea5d4} 
+void thread\+\_\+print (\begin{DoxyParamCaption}\item[{int}]{id}{, }\item[{std\+::vector$<$ std\+::vector$<$ int $>$ $>$ \&}]{board}{, }\item[{int}]{start\+Row}{, }\item[{int}]{end\+Row}{, }\item[{int}]{start\+Col}{, }\item[{int}]{end\+Col}{, }\item[{std\+::binary\+\_\+semaphore \&}]{mysem}{, }\item[{std\+::binary\+\_\+semaphore \&}]{nextsem}{}\end{DoxyParamCaption})}
+
+\Hypertarget{gameoflife_8cpp_a23e06caa33765e9066572f9d9e1c4ae4}\index{gameoflife.cpp@{gameoflife.cpp}!updown@{updown}}
+\index{updown@{updown}!gameoflife.cpp@{gameoflife.cpp}}
+\doxysubsubsection{\texorpdfstring{updown()}{updown()}}
+{\footnotesize\ttfamily \label{gameoflife_8cpp_a23e06caa33765e9066572f9d9e1c4ae4} 
+std\+::binary\+\_\+semaphore updown (\begin{DoxyParamCaption}\item[{2}]{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{gameoflife_8cpp_ac0459eb0ff914992fedc47c186c9b86f}\index{gameoflife.cpp@{gameoflife.cpp}!COL@{COL}}
+\index{COL@{COL}!gameoflife.cpp@{gameoflife.cpp}}
+\doxysubsubsection{\texorpdfstring{COL}{COL}}
+{\footnotesize\ttfamily \label{gameoflife_8cpp_ac0459eb0ff914992fedc47c186c9b86f} 
+int COL = 30}
+
+\Hypertarget{gameoflife_8cpp_a3b0a2b7a185fb4a44c57229a653fca70}\index{gameoflife.cpp@{gameoflife.cpp}!ROW@{ROW}}
+\index{ROW@{ROW}!gameoflife.cpp@{gameoflife.cpp}}
+\doxysubsubsection{\texorpdfstring{ROW}{ROW}}
+{\footnotesize\ttfamily \label{gameoflife_8cpp_a3b0a2b7a185fb4a44c57229a653fca70} 
+int ROW = 30}
+
