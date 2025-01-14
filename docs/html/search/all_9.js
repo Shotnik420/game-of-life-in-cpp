@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['row_0',['ROW',['../gameoflife_8cpp.html#a3b0a2b7a185fb4a44c57229a653fca70',1,'gameoflife.cpp']]]
+  ['print_5fboard_0',['print_board',['../gameoflife_8cpp.html#af20d35058bea9efc68e032e2da377e0f',1,'gameoflife.cpp']]]
 ];
